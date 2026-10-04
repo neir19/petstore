@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Karate Timeline</title>
+    <style>
+      body, html { font-family: arial, sans-serif; font-size: 11pt; }
+      #visualization { box-sizing: border-box; width: 100%; height: 300px; }
+      .vis-item.failed { background-color: #F2928C; }
+      .page-heading { padding: 0.5em; margin-bottom: 0.5em; background-color: lightcyan; border: 1px solid gray; }
+    </style>
+    <script src="res/vis.min.js"></script>
+    <link href="res/vis.min.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="page-heading">
+      <a href="karate-summary.html">Summary</a>
+    </div>     
+    <div id="visualization"></div>
+    <script>
+var groups = [{"content":"main","id":1}];
+var items = [{"id":1,"group":1,"content":"features/user/user-lifecycle[1:8]","start":1791027057325,"end":1791027057986,"title":"features/user/user-lifecycle[1:8] 06:30:57.325-06:30:57.986 Crear usuario"},{"id":2,"group":1,"content":"features/user/user-lifecycle[2:13]","start":1791027057991,"end":1791027058493,"title":"features/user/user-lifecycle[2:13] 06:30:57.991-06:30:58.493 Consultar el usuario creado"},{"id":3,"group":1,"content":"features/user/user-lifecycle[3:26]","start":1791027058498,"end":1791027059232,"title":"features/user/user-lifecycle[3:26] 06:30:58.498-06:30:59.232 Actualizar nombre y correo del usuario"},{"id":4,"group":1,"content":"features/user/user-lifecycle[4:35]","start":1791027059236,"end":1791027060431,"title":"features/user/user-lifecycle[4:35] 06:30:59.236-06:31:00.431 Consultar el usuario actualizado"},{"id":5,"group":1,"content":"features/user/user-lifecycle[5:53]","start":1791027060435,"end":1791027060936,"title":"features/user/user-lifecycle[5:53] 06:31:00.435-06:31:00.936 Eliminar usuario"},{"id":6,"group":1,"content":"features/user/user-lifecycle[6:63]","start":1791027060940,"end":1791027061673,"title":"features/user/user-lifecycle[6:63] 06:31:00.940-06:31:01.673 Confirmar que el usuario eliminado ya no existe"}];
+</script>
+    <script>
+      var container = document.getElementById('visualization');
+      var timeline = new vis.Timeline(container);
+      timeline.setOptions({groupOrder: 'content'});
+      timeline.setGroups(new vis.DataSet(groups));
+      timeline.setItems(new vis.DataSet(items));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="res/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="res/karate-report.css" type="text/css"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <script type="text/javascript" src="res/jquery.min.js"></script>
+    <script type="text/javascript" src="res/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="res/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="res/karate-report.js"></script>
+    <script type="text/javascript" src="res/Resemble.js"></script>
+    <script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init('phc_M6fKk3dSX9HjglkqPSybauGas45NINb7EgsPGU8N9g1',{
+  api_host:'https://app.posthog.com',
+  persistence:'localStorage',
+  autocapture:false,
+  capture_pageview:false,
+  api_transport:'sendBeacon',
+  loaded: function(posthog) { 
+    posthog.capture("report_feature",{distinct_id:"34a1be07-d3d2-4a58-b129-23b9f7ef34a7",karate_version:"1.5.2",karate_meta:null});
+  }
+});
+</script>
+
+    <title>features.update-user</title>
+  </head>
+  <body>
+    <div id="root-container">
+      <div id="leftnav">
+        
+        <div>
+  <div class="nav-logo">
+    <a href="https://karatelabs.io">
+      <img src="karate-labs-logo-ring.svg" alt="Karate Labs"/>
+    </a>
+    <div class="nav-count">
+      <div id="nav-pass" class="bg-success">1</div>
+      <div id="nav-fail" class="bg-danger">0</div>
+    </div>
+  </div>
+  <div id="nav-env">
+    <div></div>
+  </div>
+  <div id="nav-type">
+    <div>Scenarios</div>
+  </div>
+  <div id="nav-date">
+    <div>2026-10-03 06:00:10 a. m.</div>
+  </div>
+</div>
+
+        <div class="nav-container">
+          <div class="nav-item passed">
+            <a href="#[1:7]"><span>[1:7]</span> <span>Update an existing user</span></a>
+          </div>
+        </div>
+      </div>
+      <div id="content">
+        <div class="page-heading alert alert-primary">
+          <a href="karate-summary.html">Summary</a><span class="feature-label">|</span>
+          <a href="karate-tags.html">Tags</a><span class="feature-label">|</span>
+          <span class="feature-label">Feature:</span>
+          <span class="feature-path">features/update-user.feature</span><span class="feature-label">|</span>
+          <span class="feature-name">Update a user by username</span>
+          <span class="feature-description"></span>
+        </div>
+        <div class="scenario">
+          <div class="scenario-heading" id="[1:7]">
+            <div class="heading-container">
+              <div class="scenario-tags">
+                <a class="badge badge-primary" href="karate-tags.html">user</a>
+              </div>
+              <div class="scenario-keyword">
+                Scenario: <span>[1:7]</span>
+                <span class="scenario-name">Update an existing user</span>
+                <span></span>
+              </div>
+            </div>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>483</span>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-container" id="[1:7]bg">
+              <div class="step-ref bg-step">&gt;&gt;</div>
+              <div class="step-cell passed">Background:</div>
+            </div>
+            <div class="time-cell passed"></div>
+          </div>
+          <div data-parent="[1:7]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.4">
+      <div class="step-ref bg-step">4</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>url &#39;https://petstore.swagger.io/v2&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.8">
+      <div class="step-ref passed">8</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def creation = call read(&#39;classpath:features/create-user.feature&#39;)</span>
+      </div>
+    </div>
+    <div class="time-cell passed">239</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  <div>
+        
+    <div class="step-row">
+      <div class="step-container" id="0.8.0.call">
+        <div class="step-ref passed">&gt;&gt;</div>
+        <div class="step-indent"></div>
+        <div class="step-cell passed">features.create-user</div>
+      </div>
+      <div class="time-cell passed">237</div>
+    </div>
+    <div>
+      <div><div>
+  
+
+  
+
+  <div class="step-row" data-parent="0.8.0.call">
+    <div class="step-container" id="0.8.0.call.0.4">
+      <div class="step-ref passed">4</div>
+      <div class="step-indent"></div>
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>url &#39;https://petstore.swagger.io/v2&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+      <div><div>
+  
+
+  
+
+  <div class="step-row" data-parent="0.8.0.call">
+    <div class="step-container" id="0.8.0.call.0.5">
+      <div class="step-ref passed">5</div>
+      <div class="step-indent"></div>
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def username = &#39;karate_&#39; + java.util.UUID.randomUUID().toString().substring(0, 8)</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+      <div><div>
+  
+
+  
+
+  <div class="step-row" data-parent="0.8.0.call">
+    <div class="step-container" id="0.8.0.call.0.9">
+      <div class="step-ref passed">9</div>
+      <div class="step-indent"></div>
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def user =</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  <div class="preformatted" data-parent="0.8.0.call.0.9">{
+  &quot;id&quot;: 0,
+  &quot;username&quot;: &quot;#(username)&quot;,
+  &quot;firstName&quot;: &quot;Test&quot;,
+  &quot;lastName&quot;: &quot;User&quot;,
+  &quot;email&quot;: &quot;#(username + &#39;@example.com&#39;)&quot;,
+  &quot;password&quot;: &quot;Passw0rd!&quot;,
+  &quot;phone&quot;: &quot;5551234567&quot;,
+  &quot;userStatus&quot;: 0
+}</div>
+
+  
+
+     
+
+  
+
+</div>
+</div>
+      <div><div>
+  
+
+  
+
+  <div class="step-row" data-parent="0.8.0.call">
+    <div class="step-container" id="0.8.0.call.0.22">
+      <div class="step-ref passed">22</div>
+      <div class="step-indent"></div>
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>print &#39;Usuario generado:&#39;, user</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.8.0.call.0.22">06:00:09.766 [print] Usuario generado: {
+  &quot;id&quot;: 0,
+  &quot;username&quot;: &quot;karate_6a11a30e&quot;,
+  &quot;firstName&quot;: &quot;Test&quot;,
+  &quot;lastName&quot;: &quot;User&quot;,
+  &quot;email&quot;: &quot;karate_6a11a30e@example.com&quot;,
+  &quot;password&quot;: &quot;Passw0rd!&quot;,
+  &quot;phone&quot;: &quot;5551234567&quot;,
+  &quot;userStatus&quot;: 0
+}
+ 
+</div>   
+
+  
+
+</div>
+</div>
+      <div><div>
+  
+
+  
+
+  <div class="step-row" data-parent="0.8.0.call">
+    <div class="step-container" id="0.8.0.call.0.23">
+      <div class="step-ref passed">23</div>
+      <div class="step-indent"></div>
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;user&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+      <div><div>
+  
+
+  
+
+  <div class="step-row" data-parent="0.8.0.call">
+    <div class="step-container" id="0.8.0.call.0.24">
+      <div class="step-ref passed">24</div>
+      <div class="step-indent"></div>
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request user</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+      <div><div>
+  
+
+  
+
+  <div class="step-row" data-parent="0.8.0.call">
+    <div class="step-container" id="0.8.0.call.0.25">
+      <div class="step-ref passed">25</div>
+      <div class="step-indent"></div>
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method POST</span>
+      </div>
+    </div>
+    <div class="time-cell passed">235</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.8.0.call.0.25">06:00:09.767 request:
+1 &gt; POST https://petstore.swagger.io/v2/user
+1 &gt; Content-Type: application/json; charset=UTF-8
+1 &gt; Content-Length: 171
+1 &gt; Host: petstore.swagger.io
+1 &gt; Connection: Keep-Alive
+1 &gt; User-Agent: Apache-HttpClient/4.5.14 (Java/24.0.2)
+1 &gt; Accept-Encoding: gzip,deflate
+{&quot;id&quot;:0,&quot;username&quot;:&quot;karate_6a11a30e&quot;,&quot;firstName&quot;:&quot;Test&quot;,&quot;lastName&quot;:&quot;User&quot;,&quot;email&quot;:&quot;karate_6a11a30e@example.com&quot;,&quot;password&quot;:&quot;Passw0rd!&quot;,&quot;phone&quot;:&quot;5551234567&quot;,&quot;userStatus&quot;:0}
+
+06:00:10.001 response time in milliseconds: 233
+1 &lt; 200
+1 &lt; Date: Sat, 03 Oct 2026 11:00:09 GMT
+1 &lt; Content-Type: application/json
+1 &lt; Transfer-Encoding: chunked
+1 &lt; Connection: keep-alive
+1 &lt; Access-Control-Allow-Origin: *
+1 &lt; Access-Control-Allow-Methods: GET, POST, DELETE, PUT
+1 &lt; Access-Control-Allow-Headers: Content-Type, api_key, Authorization
+1 &lt; Server: Jetty(9.2.9.v20150224)
+{&quot;code&quot;:200,&quot;type&quot;:&quot;unknown&quot;,&quot;message&quot;:&quot;9223372036854756511&quot;}
+
+</div>   
+
+  
+
+</div>
+</div>
+      <div><div>
+  
+
+  
+
+  <div class="step-row" data-parent="0.8.0.call">
+    <div class="step-container" id="0.8.0.call.0.26">
+      <div class="step-ref passed">26</div>
+      <div class="step-indent"></div>
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+      <div><div>
+  
+
+  
+
+  <div class="step-row" data-parent="0.8.0.call">
+    <div class="step-container" id="0.8.0.call.0.27">
+      <div class="step-ref passed">27</div>
+      <div class="step-indent"></div>
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response.code == 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+      <div><div>
+  
+
+  
+
+  <div class="step-row" data-parent="0.8.0.call">
+    <div class="step-container" id="0.8.0.call.0.28">
+      <div class="step-ref passed">28</div>
+      <div class="step-indent"></div>
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response.type == &#39;#string&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+      <div><div>
+  
+
+  
+
+  <div class="step-row" data-parent="0.8.0.call">
+    <div class="step-container" id="0.8.0.call.0.29">
+      <div class="step-ref passed">29</div>
+      <div class="step-indent"></div>
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response.message == &#39;#string&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+      <div><div>
+  
+
+  
+
+  <div class="step-row" data-parent="0.8.0.call">
+    <div class="step-container" id="0.8.0.call.0.30">
+      <div class="step-ref passed">30</div>
+      <div class="step-indent"></div>
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def createdUser = user</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+    </div>    
+  </div>
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.9">
+      <div class="step-ref passed">9</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def createdUser = creation.createdUser</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.10">
+      <div class="step-ref passed">10</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def updatedUser =</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  <div class="preformatted" data-parent="0.10">{
+  &quot;id&quot;: 0,
+  &quot;username&quot;: &quot;#(createdUser.username)&quot;,
+  &quot;firstName&quot;: &quot;Updated&quot;,
+  &quot;lastName&quot;: &quot;User&quot;,
+  &quot;email&quot;: &quot;#(createdUser.username + &#39;@updated.example.com&#39;)&quot;,
+  &quot;password&quot;: &quot;NewPassw0rd!&quot;,
+  &quot;phone&quot;: &quot;5559876543&quot;,
+  &quot;userStatus&quot;: 1
+}</div>
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.23">
+      <div class="step-ref passed">23</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;user&#39;, createdUser.username</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.24">
+      <div class="step-ref passed">24</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request updatedUser</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.25">
+      <div class="step-ref passed">25</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method PUT</span>
+      </div>
+    </div>
+    <div class="time-cell passed">243</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.25">06:00:10.004 request:
+1 &gt; PUT https://petstore.swagger.io/v2/user/karate_6a11a30e
+1 &gt; Content-Type: application/json; charset=UTF-8
+1 &gt; Content-Length: 185
+1 &gt; Host: petstore.swagger.io
+1 &gt; Connection: Keep-Alive
+1 &gt; User-Agent: Apache-HttpClient/4.5.14 (Java/24.0.2)
+1 &gt; Accept-Encoding: gzip,deflate
+{&quot;id&quot;:0,&quot;username&quot;:&quot;karate_6a11a30e&quot;,&quot;firstName&quot;:&quot;Updated&quot;,&quot;lastName&quot;:&quot;User&quot;,&quot;email&quot;:&quot;karate_6a11a30e@updated.example.com&quot;,&quot;password&quot;:&quot;NewPassw0rd!&quot;,&quot;phone&quot;:&quot;5559876543&quot;,&quot;userStatus&quot;:1}
+
+06:00:10.245 response time in milliseconds: 241
+1 &lt; 200
+1 &lt; Date: Sat, 03 Oct 2026 11:00:10 GMT
+1 &lt; Content-Type: application/json
+1 &lt; Transfer-Encoding: chunked
+1 &lt; Connection: keep-alive
+1 &lt; Access-Control-Allow-Origin: *
+1 &lt; Access-Control-Allow-Methods: GET, POST, DELETE, PUT
+1 &lt; Access-Control-Allow-Headers: Content-Type, api_key, Authorization
+1 &lt; Server: Jetty(9.2.9.v20150224)
+{&quot;code&quot;:200,&quot;type&quot;:&quot;unknown&quot;,&quot;message&quot;:&quot;9223372036854756512&quot;}
+
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.26">
+      <div class="step-ref passed">26</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.27">
+      <div class="step-ref passed">27</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response.code == 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.28">
+      <div class="step-ref passed">28</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response.type == &#39;#string&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.29">
+      <div class="step-ref passed">29</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response.message == &#39;#string&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
