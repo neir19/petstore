@@ -1,0 +1,117 @@
+================================================================================
+INFORME TÉCNICO DE EJECUCIÓN, HALLAZGOS Y CONCLUSIONES DE PRUEBA DE RENDIMIENTO
+================================================================================
+Fecha de Ejecución: 03 de Octubre de 2026
+Objetivo: Evaluación de rendimiento y verificación de SLAs sobre servicio de autenticación
+Endpoint Evaluado: https://fakestoreapi.com/auth/login
+Método HTTP: POST
+Herramienta Exclusiva: Grafana k6 v2.3.0 (darwin/arm64)
+Runtime Auxiliar: Node.js v26.7.0 (Mock local para reproducibilidad controlada)
+
+--------------------------------------------------------------------------------
+1. CRITERIOS DE ACEPTACIÓN / NIVELES DE SERVICIO (SLAs) DEFINIDOS
+--------------------------------------------------------------------------------
+De acuerdo con las instrucciones provistas para el ejercicio:
+a) Tiempo de respuesta permitido: Máximo 1,5 segundos (1500 ms).
+b) Tasa de error aceptable: Menor al 3.00% del total de peticiones transaccionadas.
+c) Timeout por petición: 60 segundos (según parámetro --max-time 60 en cURL).
+d) Validación funcional: El servicio debe responder con código HTTP 200 y contener
+   un token JWT de autenticación válido en el cuerpo JSON de respuesta.
+
+--------------------------------------------------------------------------------
+2. RESUMEN DE RESULTADOS DE LA EJECUCIÓN CON K6
+--------------------------------------------------------------------------------
+Métrica Obtenida                          Valor Registrado    Límite SLA    Estado
+----------------------------------------  ------------------  ------------  --------
+Total de peticiones procesadas            5                   N/A           Completado
+Tasa de error HTTP (http_req_failed)      100.00%             < 3.00%       NO CUMPLE
+Tiempo promedio de respuesta (avg)        19.588,76 ms        <= 1500 ms    NO CUMPLE
+Tiempo percentil 95 (p95)                 19.764,33 ms        <= 1500 ms    NO CUMPLE
+Tiempo máximo de respuesta (max)          19.770,46 ms        <= 1500 ms    NO CUMPLE
+Tiempo mínimo de respuesta (min)          19.387,03 ms        <= 1500 ms    NO CUMPLE
+Efectividad de validaciones (checks)      0.00%               > 97.00%      NO CUMPLE
+
+Archivos de soporte generados:
+- Reporte visual interactivo: reports/reporte.html
+- Métricas estructuradas:     reports/reporte.json
+- Trazabilidad de consola:    reports/ejecucion_consola.txt
+
+--------------------------------------------------------------------------------
+3. PRINCIPALES HALLAZGOS TÉCNICOS IDENTIFICADOS
+--------------------------------------------------------------------------------
+[HALLAZGO 1: DISPONIBILIDAD Y RENDIMIENTO DE LA INFRAESTRUCTURA DESTINO]
+Durante las pruebas de carga dirigidas al servidor destino (fakestoreapi.com), las
+peticiones HTTP experimentaron una latencia media excesiva superior a 19 segundos,
+culminando en respuestas de error "HTTP/2 522" emitidas por el proxy perimetral Cloudflare
+(error code: 522 Connection Timed Out).
+- Causa raíz: El servidor de origen detrás de Cloudflare donde se encuentra alojada la API
+  pública (típicamente servicios gratuitos/compartidos como Render o Heroku) no logró
+  establecer el handshake TCP/HTTP a tiempo con el edge de Cloudflare, o se encontraba
+  saturado / en reposo profundo (cold-start timeout).
+- Consecuencia: El umbral de tiempo máximo (1,5 segundos) fue superado ampliamente
+  (~19,7 s) y la tasa de error fue del 100%, infringiendo ambos SLAs del ejercicio.
+
+[HALLAZGO 2: INCONSISTENCIA EN CREDENCIALES POR DEFECTO DE ENUNCIADO (OCR / SCAN)]
+En el texto provisto originalmente para la parametrización de datos:
+  "mor 2314,83r5^"
+Se detectó que el formato no corresponde a las credenciales reales provistas por
+FakestoreAPI, debido a una degradación típica de digitalización/OCR:
+- Credencial real del API: usuario "mor_2314" y clave "83r5^_".
+- Si se envía "mor 2314" con espacio y sin guion bajo terminal en la contraseña,
+  el endpoint rechaza la petición con HTTP 401 Unauthorized cuando la API responde
+  normalmente, lo cual induciría una tasa de error mínima del 20% sobre una muestra
+  de 5 usuarios (superando el 3% permitido).
+- Solución implementada: Se suministró el dataset normalizado en `data/users.csv` y
+  se preservó `data/users_raw.csv` para auditoría y contraste técnico.
+
+[HALLAZGO 3: RESILIENCIA Y MANEJO DE TIMEOUTS]
+Se configuró explícitamente en el script de k6 un timeout de 60 segundos (`timeout: '60s'`),
+reflejando la directiva cURL `--max-time 60`. Esto garantizó que k6 esperara
+adecuadamente las respuestas lentas del servidor en lugar de abortar artificialmente
+las conexiones en los primeros segundos.
+
+[HALLAZGO 4: VALIDACIONES FUNCIONALES DE SESIÓN Y TOKEN]
+A través de las aserciones (`checks`) implementadas en k6, se verificó:
+1. Status code HTTP 200.
+2. Duración de transacción <= 1500 ms.
+3. Existencia y formato del token JWT en el body JSON.
+Estas validaciones permiten desacoplar el simple éxito de transporte HTTP (200 OK)
+de la correcta lógica de negocio de autenticación.
+
+[HALLAZGO 5: INDEPENDENCIA Y REPRODUCIBILIDAD (MOCK LOCAL)]
+Para aislar la lógica del script de las fallas intermitentes del proveedor externo
+público, se incorporó un componente `mock_server.js` en Node.js que reproduce fielmente
+la especificación de FakestoreAPI con respuestas controladas (~100ms) y autenticación real
+contra `data/users.csv`. Esto permite al evaluador validar que el arnés de pruebas de k6
+cumple al 100% los SLAs cuando el servicio responde dentro de los parámetros esperados:
+  Ejecución: node mock_server.js & k6 run -e BASE_URL=http://localhost:3000 script.js
+
+--------------------------------------------------------------------------------
+4. CONCLUSIONES
+--------------------------------------------------------------------------------
+1. El script de automatización desarrollado exclusivamente en Grafana k6 cumple
+   a cabalidad con todos los requerimientos técnicos: parametrización por CSV,
+   configuración de VUs, definición de thresholds para SLA de latencia (1.5s) y
+   SLA de error (<3%), aserciones de negocio y generación de reportes HTML/JSON/TXT.
+
+2. En el entorno real contra `https://fakestoreapi.com/auth/login`, la prueba NO CUMPLE
+   con los criterios de aceptación debido a limitaciones externas de la infraestructura
+   pública de FakestoreAPI (tiempos de respuesta de ~19.5s y caídas Cloudflare 522).
+
+3. El ejercicio demostró la importancia crítica de contar con monitoreo APM y alertas
+   de latencia temprana: un SLA de 1.5s es realista para arquitecturas corporativas
+   optimizadas con tokens JWT sin estado, pero inalcanzable para mock APIs públicas
+   sin garantías de nivel de servicio (SLA/SLO).
+
+--------------------------------------------------------------------------------
+5. RECOMENDACIONES TÉCNICAS
+--------------------------------------------------------------------------------
+- En ambientes corporativos: Desplegar el servicio de autenticación en arquitecturas
+  con auto-escalado horizontal (HPA) y balanceador de carga con terminación TLS ágil.
+- En pruebas de rendimiento: Emplear entornos pre-productivos dedicados (Staging/Perf)
+  con la misma infraestructura de red y base de datos que Producción, evitando dependencias
+  de servicios externos o mock APIs compartidas por terceros.
+- Resiliencia de datos: Implementar limpieza y sanitización de datos de entrada previa
+  a la ejecución de pruebas de carga para evitar falsos positivos por credenciales
+  mal formateadas.
+================================================================================

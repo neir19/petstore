@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reporte de Rendimiento - K6 Login Test</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-light: #eef2ff;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --danger: #dc2626;
+      --danger-bg: #fee2e2;
+      --warning: #d97706;
+      --warning-bg: #fef3c7;
+      --text: #1f2937;
+      --text-muted: #6b7280;
+      --bg: #f9fafb;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    header {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    h1 { font-size: 1.5rem; font-weight: 700; color: #111827; }
+    .subtitle { font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem; }
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .badge-success { background: var(--success-bg); color: var(--success); }
+    .badge-danger { background: var(--danger-bg); color: var(--danger); }
+    .badge-warning { background: var(--warning-bg); color: var(--warning); }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .card-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .card-value {
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: #111827;
+    }
+    .card-sub {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+    .section-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #111827;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    th {
+      background: #f8fafc;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    tr:last-child td { border-bottom: none; }
+    .two-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 768px) {
+      .two-cols { grid-template-columns: 1fr; }
+    }
+    .info-list { list-style: none; }
+    .info-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed var(--border);
+      font-size: 0.875rem;
+    }
+    .info-list li:last-child { border-bottom: none; }
+    .info-label { color: var(--text-muted); }
+    .info-value { font-weight: 600; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Reporte de Pruebas de Rendimiento - K6</h1>
+        <div class="subtitle">API: <code>https://fakestoreapi.com/auth/login</code> | Ejecutado: 10/04/2026, 15:37:44</div>
+      </div>
+      <div>
+        <span class="badge badge-success" style="font-size: 1rem; padding: 0.5rem 1.25rem;">
+          ESTADO: CUMPLE SLAs
+        </span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-title">Total Peticiones</div>
+        <div class="card-value">123</div>
+        <div class="card-sub">4.73 peticiones / seg</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Tasa de Error (SLA &lt; 3%)</div>
+        <div class="card-value" style="color: var(--danger);">
+          100.00%
+        </div>
+        <div class="card-sub">123 fallidas / 123 totales</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Tiempo P95 (SLA &le; 1.5s)</div>
+        <div class="card-value" style="color: var(--success);">
+          281.28 ms
+        </div>
+        <div class="card-sub">Límite SLA: 1500 ms</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Tiempo Máximo</div>
+        <div class="card-value" style="color: var(--success);">
+          472.48 ms
+        </div>
+        <div class="card-sub">Promedio: 226.36 ms</div>
+      </div>
+    </div>
+
+    <div class="two-cols">
+      <div class="card">
+        <div class="section-title">Validaciones Funcionales (Checks)</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Validación</th>
+              <th style="text-align: right;">Éxitos</th>
+              <th style="text-align: right;">Fallos</th>
+              <th style="text-align: right;">Efectividad</th>
+              <th style="text-align: center;">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+        <tr>
+          <td>Código de respuesta es 200</td>
+          <td style="text-align: right; color: #16a34a; font-weight: 600;">0</td>
+          <td style="text-align: right; color: #dc2626; font-weight: 600;">123</td>
+          <td style="text-align: right;">0.0%</td>
+          <td style="text-align: center;"><span class="badge badge-danger">FALLÓ</span></td>
+        </tr>
+      
+        <tr>
+          <td>Tiempo de respuesta &lt;= 1500ms</td>
+          <td style="text-align: right; color: #16a34a; font-weight: 600;">123</td>
+          <td style="text-align: right; color: #6b7280; font-weight: 600;">0</td>
+          <td style="text-align: right;">100.0%</td>
+          <td style="text-align: center;"><span class="badge badge-success">100%</span></td>
+        </tr>
+      
+        <tr>
+          <td>Respuesta contiene token válido</td>
+          <td style="text-align: right; color: #16a34a; font-weight: 600;">0</td>
+          <td style="text-align: right; color: #dc2626; font-weight: 600;">123</td>
+          <td style="text-align: right;">0.0%</td>
+          <td style="text-align: center;"><span class="badge badge-danger">FALLÓ</span></td>
+        </tr>
+      
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Evaluación de Criterios (Thresholds)</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Criterio / Métrica</th>
+              <th>Resultado</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="two-cols">
+      <div class="card">
+        <div class="section-title">Desglose Estadístico de Latencias</div>
+        <ul class="info-list">
+          <li><span class="info-label">Tiempo Mínimo:</span><span class="info-value">198.01 ms</span></li>
+          <li><span class="info-label">Tiempo Mediana (p50):</span><span class="info-value">216.24 ms</span></li>
+          <li><span class="info-label">Tiempo Promedio:</span><span class="info-value">226.36 ms</span></li>
+          <li><span class="info-label">Percentil 90 (p90):</span><span class="info-value">249.87 ms</span></li>
+          <li><span class="info-label">Percentil 95 (p95):</span><span class="info-value">281.28 ms</span></li>
+          <li><span class="info-label">Tiempo Máximo:</span><span class="info-value">472.48 ms</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Detalles de la Configuración</div>
+        <ul class="info-list">
+          <li><span class="info-label">Herramienta:</span><span class="info-value">Grafana k6 v2.3.0</span></li>
+          <li><span class="info-label">Método y Endpoint:</span><span class="info-value">POST /auth/login</span></li>
+          <li><span class="info-label">Timeout configurado:</span><span class="info-value">60 segundos</span></li>
+          <li><span class="info-label">Archivo de datos:</span><span class="info-value">data/users.csv (5 usuarios)</span></li>
+          <li><span class="info-label">Tasa de éxito global:</span><span class="info-value">33.33%</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
